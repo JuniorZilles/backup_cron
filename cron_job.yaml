@@ -1,0 +1,33 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: postgresql-backup-cron-job
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: postgresql-backup-job-pod
+            image: juniorzilles/postgres-backup:latest
+            env:
+              - name: PG_HOST
+                value: "192.168.56.101"
+              - name: PG_PORT
+                value: "30008"
+              - name: PG_DBNAME_1
+                value: "inspetores"
+              - name: PG_DBNAME_2
+                value: "vpn-db"
+              - name: PG_USER
+                value: "postgres"
+              - name: PG_PASS
+                value: "postgres"
+            imagePullPolicy: Always
+            args:
+            - /bin/bash
+            - -c
+            - ./backup.sh;
+          restartPolicy: OnFailure
+      backoffLimit: 3
