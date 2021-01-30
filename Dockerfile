@@ -6,4 +6,5 @@ RUN apk add --no-cache --upgrade bash
 
 COPY backup.sh .
 
+RUN chmod +x backup.sh
 CMD [ "backup.sh" ]
