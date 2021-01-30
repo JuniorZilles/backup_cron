@@ -2,8 +2,8 @@ FROM alpine:latest
 
 RUN apk update
 RUN apk add postgresql
+RUN apk add --no-cache --upgrade bash
 
 COPY backup.sh .
 
-ENTRYPOINT [ "/bin/sh" ]
-CMD [ "./backup.sh" ]
+CMD [ "backup.sh" ]

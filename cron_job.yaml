@@ -3,30 +3,30 @@ kind: CronJob
 metadata:
   name: postgresql-backup-cron-job
 spec:
-  schedule: "0 2 * * *"
+  schedule: "*/1 * * * *"
   jobTemplate:
     spec:
       template:
         spec:
           containers:
           - name: postgresql-backup-job-pod
-            image: juniorzilles/postgres-backup:latest
+            image: juniorzilles/backup_cron:latest
             env:
               - name: PG_HOST
                 value: "192.168.56.101"
               - name: PG_PORT
                 value: "30008"
               - name: PG_DBNAME_1
-                value: "inspetores"
-              - name: PG_DBNAME_2
                 value: "vpn-db"
+              - name: PG_DBNAME_2
+                value: "inspetores"
               - name: PG_USER
                 value: "postgres"
               - name: PG_PASS
                 value: "postgres"
             imagePullPolicy: Always
             args:
-            - /bin/bash
+            - /bin/sh
             - -c
             - ./backup.sh;
           restartPolicy: OnFailure
