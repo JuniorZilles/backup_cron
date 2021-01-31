@@ -25,7 +25,7 @@ echo "Verificando se tem conteúdo no arquivo gerado"
 filesize=$(stat -c %s $file_name)
 mfs=10
 if [[ "$filesize" -gt "$mfs" ]]; then
-echo "Salvar o arquivo"
+echo "Salvar o arquivo no outro servidor"
 sshpass -p "secret" scp $file_name stack@192.168.56.101:/home/stack
 echo "Dump salvo"
 fi
