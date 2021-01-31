@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Inicio da Execução do Backup"
 date_now=$(date +%Y%m%d-%H%M)
-
+path=$(pwd)
 echo "Criando diretório"
 if [ ! -d "$caminho" ]; then
     mkdir pg-backup
@@ -26,6 +26,6 @@ filesize=$(stat -c %s $file_name)
 mfs=10
 if [[ "$filesize" -gt "$mfs" ]]; then
 echo "Salvar o arquivo no outro servidor"
-sshpass -p "secret" scp -r stack@192.168.56.101:/home/stack $file_name
+sshpass -p "secret" scp -r stack@192.168.56.101:/home/stack $path/$file_name
 echo "Dump salvo"
 fi
