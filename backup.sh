@@ -26,6 +26,6 @@ filesize=$(stat -c %s $file_name)
 mfs=10
 if [[ "$filesize" -gt "$mfs" ]]; then
 echo "Salvar o arquivo no outro servidor"
-sshpass -p "secret" scp $file_name stack@192.168.56.102:/home/stack
+sshpass -p "secret" scp $file_name stack@192.168.56.102:/home/stack/
 echo "Dump salvo"
 fi
