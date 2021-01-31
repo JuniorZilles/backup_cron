@@ -1,4 +1,13 @@
 #!/bin/sh
+echo "Inicio da Execução do know_hosts_add"
+eval $(ssh-agent -s)
+
+bash -c 'ssh-add <(echo "$SSH_PRIVATE_KEY")'
+
+mkdir -p ~/.ssh
+
+echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+
 echo "Inicio da Execução do Backup"
 date_now=$(date +%Y%m%d-%H%M)
 path=$(pwd)
