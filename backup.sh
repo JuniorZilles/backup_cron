@@ -21,11 +21,11 @@ echo "Gerando o .tar.gz"
 file_name="pg-backup-"$date_now".tar.gz"
 tar -zcvf $file_name pg-backup
 
-echo "Gerando verificando se tem conteúdo no arquivo gerado"
+echo "Verificando se tem conteúdo no arquivo gerado"
 filesize=$(stat -c %s $file_name)
 mfs=10
 if [[ "$filesize" -gt "$mfs" ]]; then
 echo "Salvar o arquivo"
-#scp $file_name stack@192.168.56.102
+sshpass -p "secret" scp $file_name stack@192.168.56.101:/home/stack
 echo "Dump salvo"
 fi
